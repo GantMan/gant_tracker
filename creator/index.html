@@ -7,15 +7,31 @@
     <h1>Gant Faces Data Creator</h1>
     <div style="position: relative; height: 80vh">
       <img id="background" src="background.jpg" height="100%" />
-      <img id="gant" src="gant1.png" style="position: absolute; left: 0; height: 300px; top: 242px;" />
+      <img id="gant" src="gant1.png" style="position: absolute; left: 60px; height: 300px; top: 242px;" />
       <canvas id="detection" style="position: absolute; left: 0" />
     </div>
 
     <script>
+      function gant1() {
+        const backgroundSize = [816, 620]
+        const gantPos = [60, 242]
+        const relativeFacePos = [72.624, 51.88, 75.888, 120.7]
+        const facePos = [
+          (gantPos[0] + relativeFacePos[0]) / backgroundSize[0], 
+          (gantPos[1] + relativeFacePos[1]) / backgroundSize[1],
+          (gantPos[0] + relativeFacePos[0] + relativeFacePos[2]) / backgroundSize[0], 
+          (gantPos[1] +  relativeFacePos[3]) / backgroundSize[1] 
+        ]
+        
+        return facePos
+      }
+
       async function placeGant() {
             const petImage = document.getElementById("background");
-            const result = [0.089, 0.474, 0.182, 0.585]
-
+            const facePos = gant1()
+            console.log(facePos)
+            // const result = [0.089, 0.474, 0.182, 0.585] // 72.624 293.88 75.888 68.82
+            const result = facePos
             // Draw box on canvas
             const detection = document.getElementById("detection");
             const imgWidth = petImage.width;
